@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: data-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: "0000"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: update
+resume:
+  parsing:
+    skills:
+      - skills
+      - skill
+      - expertise
+      - proficiencies
+      - abilities
+      - competencies
+      - qualifications
+      - technical skills
+      - core skills
+      - key skills
+    experience:
+        - experience
+        - work experience
+        - professional experience
+        - employment history
+        - career history
+        - job history
+        - relevant experience
+        - work history
+    education:
+      - education
+      - academic background
+      - qualifications
+      - degrees
+      - certifications
+      - training
+      - coursework
+      - studies
+    projects:
+      - projects
+      - work samples
+      - portfolio
+      - case studies
+      - assignments
+      - accomplishments
+      - deliverables
+      - contributions
+server:
+  port: 8084

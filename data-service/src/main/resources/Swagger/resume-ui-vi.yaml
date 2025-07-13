@@ -1,0 +1,118 @@
+openapi: 3.0.1
+info:
+  title: Resume Upload API
+  description: API for uploading and parsing resumes.
+  version: 1.0.0
+paths:
+  /upload/resume/query:
+    post:
+      summary: Upload and parse a resume
+      description: Accepts user details and returns parsed resume data.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadResumeRequest'
+
+      responses:
+        200:
+          description: Resume uploaded and parsed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResumeResponse'
+
+  /skills/query:
+    post:
+      summary: Reads resume and returns the skills from it
+      description: Accepts user details and returns parsed resume data.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FetchSkillsRequest'
+      responses:
+        200:
+          description: Resume uploaded and parsed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchSkillsResponse'
+components:
+  schemas:
+    FetchSkillsRequest:
+      type: object
+      properties:
+        resumeId:
+          type: number
+          example: 23432
+    FetchSkillsResponse:
+      type: object
+      properties:
+        resumeId:
+          type: number
+          example: ad9f1c27-b35d-4c6e-8e67-91f4d1234567
+        rawText:
+          type: string
+          example: Experienced Java Developer with 5 years at ABC Corp...
+        parsed:
+          $ref: '#/components/schemas/ParsedResume'
+    UploadResumeRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: johndoe
+        userid:
+          type: string
+          example: 12345
+        email:
+          type: string
+          format: email
+          example: johndoe@example.com
+        file:
+          type: string
+          format: binary
+    ParsedResume:
+      type: object
+      properties:
+        skills:
+          type: array
+          items:
+            type: string
+          example:
+            - Java
+            - Spring Boot
+            - SQL
+            - Microservices
+        experience:
+          type: array
+          items:
+            type: string
+          example:
+            - Senior Developer at ABC Corp (2018–2023)
+        education:
+          type: array
+          items:
+            type: string
+          example:
+            - B.Tech in Computer Science, XYZ University
+        projects:
+          type: array
+          items:
+            type: string
+          example:
+            - Online Banking System
+            - Inventory Management App
+    UploadResumeResponse:
+      type: object
+      properties:
+        resumeId:
+          type: number
+          example: 12345
+        message:
+          type: string
+          example: Resume uploaded and parsed successfully.
+
+
